@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TikViral Support</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --card:#ffffff;
+      --btn:#111111;
+      --btnText:#ffffff;
+      --shadow: 0 12px 30px rgba(0,0,0,.08);
+    }
+
+    body{
+      margin:0;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 18px 70px;
+      text-align: center;
+    }
+
+    h1{
+      margin: 0 0 10px;
+      font-size: 34px;
+      letter-spacing: .2px;
+      font-weight: 700;
+    }
+
+    .desc{
+      margin: 0 auto 26px;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card{
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      text-align: left;
+    }
+
+    label{
+      display:block;
+      font-size: 13px;
+      color: var(--text);
+      margin: 14px 0 6px;
+      font-weight: 600;
+    }
+
+    input, textarea{
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 12px 12px;
+      font-size: 14px;
+      outline: none;
+      background: #fff;
+    }
+
+    input:focus, textarea:focus{
+      border-color: #c7cdd6;
+      box-shadow: 0 0 0 4px rgba(17,24,39,.06);
+    }
+
+    textarea{
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .btn{
+      margin-top: 18px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      background: var(--btn);
+      color: var(--btnText);
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn:hover{
+      opacity: .92;
+    }
+
+    .footer{
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .footer a{
+      color:#2563eb;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .footer a:hover{ text-decoration: underline; }
+
+    .note{
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>TikViral Support</h1>
+    <p class="desc">
+      If you have any issues, feedback, or feature requests, please fill out the form below.
+      Our team will get back to you soon.
+    </p>
+
+    <div class="card">
+      <form id="supportForm">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name" />
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" />
+
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" type="text" />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message"></textarea>
+
+        <button class="btn" type="submit">Send Message</button>
+
+        <div class="note">
+          (This will open your email app to send the message.)
+        </div>
+      </form>
+    </div>
+
+    <div class="footer">
+      Or contact us directly via email:
+      <a href="mailto:support@tikviral.app">support@tikviral.app</a>
+    </div>
+  </div>
+
+  <script>
+    const TO_EMAIL = "support@tikviral.app";
+
+    document.getElementById("supportForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const subject = document.getElementById("subject").value.trim() || "TikViral Support";
+      const message = document.getElementById("message").value.trim();
+
+      const bodyLines = [
+        "Support request from TikViral",
+        "",
+        `Name: ${name || "-"}`,
+        `Email: ${email || "-"}`,
+        "",
+        "Message:",
+        message || "-"
+      ];
+
+      const mailto = `mailto:${encodeURIComponent(TO_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+      window.location.href = mailto;
+    });
+  </script>
+</body>
+</html>
